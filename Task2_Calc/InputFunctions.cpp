@@ -64,7 +64,7 @@ int InputCommand(string msg, string incorrectTypeMsg, string incorrectCommandRan
 
 			continue;
 		}
-		else if (result <= start && result >= end)
+		else if (result < start || result > end)
 		{
 			printMsg(incorrectCommandRange);
 
