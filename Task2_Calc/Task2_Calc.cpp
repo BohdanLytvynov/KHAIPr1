@@ -107,8 +107,6 @@ double num2;//2 number declare and defind with 0
 
 
 #pragma region Methods
-
-
 /// <summary>
 /// Input type of the operation
 /// </summary>
