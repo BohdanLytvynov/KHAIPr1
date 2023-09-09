@@ -144,6 +144,8 @@ Operation InputOperationType(string msg, string caseUnknown)
 /// <returns>Code to OS wether programm executed correctly or not</returns>
 int main()
 {
+	setlocale(LC_ALL, "Russian");
+
 	do
 	{
 		system("CLS");

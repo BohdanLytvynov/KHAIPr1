@@ -1,9 +1,23 @@
 #include"InputFunctions.h"
 #include <iostream>
+#include<string>
 
 #pragma region Defines
 
 #define printMsg(string) cout<<string<<endl;
+
+#pragma endregion
+
+#pragma region Methods
+
+bool isNumber(string str)
+{
+	for (char s : str)
+		if (!isdigit(s))
+			return false;
+
+	return true;
+}
 
 #pragma endregion
 
@@ -20,29 +34,31 @@ double InputNumber(string msg, string ErrorMsg)
 {
 	double r;
 
-	do
+	string str("");
+
+	for (; ;)
 	{
 		printMsg(msg);
 
-		cin >> r;//Write value to r variable
+		cin >> str;
 
-		if (cin.fail())//if writing to r fails cause of incorrect type
+		if (str.empty())
 		{
-			printMsg(ErrorMsg);
+			printMsg("You have input an empty value!");
 
-			cin.clear();//Clear cin's error flag so we can use it again
-
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');//clear input buffer
-
-			continue;//restart while cycle iteration
-		}
-		else//Correct input type
+			continue;
+		}		
+		else if (!isNumber(str))
 		{
-			break;//Stop while cycle
-		}
-	} while (true);
+			printMsg("Wrong input! It is not a number!");
 
-	return r;
+			continue;
+		}
+		else		
+			break;			
+	}					
+
+	return stod(str);
 }
 
 /// <summary>
@@ -58,35 +74,40 @@ int InputCommand(string msg, string incorrectTypeMsg, string incorrectCommandRan
 {
 	int result;
 
-	do
+	string str("");
+
+	for (; ;)
 	{
 		printMsg(msg);
 
-		cin >> result;
+		cin >> str;
 
-		if (cin.fail())
+		if (str.empty())
+		{
+			printMsg("Empty input!");
+			continue;
+		}
+		else if(!isNumber(str))
 		{
 			printMsg(incorrectTypeMsg);
-
-			cin.clear();
-
-			cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
-
 			continue;
 		}
-		else if (result <= start && result >= end)
+		else 
 		{
-			printMsg(incorrectCommandRange);
+			result = stoi(str);
 
-			continue;
-		}
-		else
-		{
+			if (result < start || result > end) // start <= result <= end - invert this
+			{
+				printMsg(incorrectCommandRange);
+
+				continue;
+			}
+				
+
 			break;
 		}
-
-	} while (true);
-
+	}
+	
 	return result;
 }
 
