@@ -1,4 +1,4 @@
-#include"InputFunctions.h"
+#include"InputFunctions.h"//Add all code form InputFunctions.h using preprocessing
 #include <iostream>
 #include<string>
 
@@ -9,11 +9,15 @@
 #pragma endregion
 
 #pragma region Methods
-
+/// <summary>
+/// Checks wether the string str is digit or not
+/// </summary>
+/// <param name="str">String for check</param>
+/// <returns>True - if str is digit</returns>
 bool isNumber(string str)
 {
-	for (char s : str)
-		if (!isdigit(s))
+	for (char s : str) //Iterate string [array of chars]
+		if (!isdigit(s))//check if every char is digit, but we need to invert this condition
 			return false;
 
 	return true;
@@ -36,29 +40,29 @@ double InputNumber(string msg, string ErrorMsg)
 
 	string str("");
 
-	for (; ;)
+	for (; ;)//Infinity looping cycle, can be break from inside
 	{
 		printMsg(msg);
 
-		cin >> str;
+		cin >> str;//Write string into str from the input stream of the console
 
-		if (str.empty())
+		if (str.empty())//Check wether string is empty
 		{
 			printMsg("You have input an empty value!");
 
-			continue;
+			continue;//Run new iteration
 		}		
-		else if (!isNumber(str))
+		else if (!isNumber(str))//Check wether str is a number if not restart the loop of input
 		{
 			printMsg("Wrong input! It is not a number!");
 
 			continue;
 		}
-		else		
+		else		//All correct, break the infinity looping
 			break;			
 	}					
 
-	return stod(str);
+	return stod(str);//Convert input to double
 }
 
 /// <summary>
@@ -76,35 +80,33 @@ int InputCommand(string msg, string incorrectTypeMsg, string incorrectCommandRan
 
 	string str("");
 
-	for (; ;)
+	for (; ;)//Infinity looping cycle, can be break from inside
 	{
 		printMsg(msg);
 
-		cin >> str;
+		cin >> str;//Write string into str from the input stream of the console
 
-		if (str.empty())
+		if (str.empty())//Check wether string is empty
 		{
 			printMsg("Empty input!");
-			continue;
+			continue; //Run new iteration
 		}
-		else if(!isNumber(str))
+		else if(!isNumber(str))//Check wether str is a number if not restart the loop of input
 		{
 			printMsg(incorrectTypeMsg);
 			continue;
 		}
 		else 
 		{
-			result = stoi(str);
+			result = stoi(str);//Convert input to int
 
-			if (result < start || result > end) // start <= result <= end - invert this
+			if (result < start || result > end) // Check range start <= result <= end
 			{
 				printMsg(incorrectCommandRange);
 
 				continue;
-			}
-				
-
-			break;
+			}				
+			break;//Success break the for loop and return the result
 		}
 	}
 	
