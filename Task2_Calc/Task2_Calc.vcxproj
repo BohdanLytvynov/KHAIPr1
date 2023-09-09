@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InputFunctions.cpp" />
     <ClCompile Include="Task2_Calc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InputFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
